@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/toolbar_" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:padding="@dimen/spacing_small">
+        <ImageView
+            android:id="@+id/add_label_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            style="@style/style_labels_img"
+            />
+
+        <EditText
+            android:id="@+id/labels_add_label_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:inputType="textMultiLine"
+            android:maxLines="1"
+            android:minLines="1"
+            android:maxLength="15"
+            android:padding="@dimen/spacing_normal"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/add_label_img"
+            android:layout_toStartOf="@id/labels_add_label_btn"
+            style="@style/style_labels_field"
+             />
+        <ImageView
+            android:id="@+id/labels_add_label_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_done"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            style="@style/style_labels_img"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/labels_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/labels_add_label_field"
+            android:visibility="visible"/>
+        <RelativeLayout
+            android:id="@+id/labels_empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/labels_add_label_btn"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                android:layout_centerInParent="true"
+                android:text="No Labels Here"
+                android:textStyle="bold"
+                android:textSize="@dimen/font_larger"
+                android:padding="@dimen/spacing_normal"
+
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="storage_layout"
+   >
+    <PreferenceCategory android:title="DATABASE">
+        <Preference android:key="pref_sync_data"
+            android:title="Sync The Database"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="BACKUP">
+        <Preference android:key="pref_backup_data"
+            android:title="Backup Data "
+            />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

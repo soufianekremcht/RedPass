@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RedPass</string>
+    <string name="aes_utils_decrypt_error">Decryption Error</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="search_hint">Search For Password</string>
+</resources>

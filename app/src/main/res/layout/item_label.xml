@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:background="?selectableItemBackground"
+    >
+
+    <ImageView
+        android:id="@+id/label_icon"
+        android:layout_width="@dimen/img_btn_size"
+        android:layout_height="@dimen/img_btn_size"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ic_label_outline_24dp"
+        style="@style/style_labels_img"
+       >
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/label_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/label_icon"
+        style="@style/style_labels_text"
+        android:text="Label"
+       />
+
+    <ImageView
+        android:id="@+id/label_delete_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_remove_circle_outline_black_24dp"
+        style="@style/style_labels_img"
+
+        />
+
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="security_layout">
+    <PreferenceCategory android:title="SECURITY">
+        <Preference
+            android:key="pref_security_change_app_password"
+            android:title="Change App Password"
+            />
+        <Preference
+            android:key="pref_security_self_destruct"
+            android:title="Failed Password Attempts"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="ACCESS">
+        <SwitchPreferenceCompat
+            android:key="pref_security_enter_finger_print"
+            android:summary="Required Compatible Hardware"
+            android:title="Enter Using Fingerprint"
+            />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

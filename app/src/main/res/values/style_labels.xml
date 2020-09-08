@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="style_labels_img">
+        <item name="android:padding">@dimen/spacing_small</item>
+        <item name="android:layout_margin">@dimen/spacing_small</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+
+    </style>
+    <style name="style_labels_field">
+        <item name="android:padding">@dimen/spacing_small</item>
+        <item name="android:layout_margin">@dimen/spacing_small</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+    </style>
+
+    <style name="style_labels_text">
+        <item name="android:padding">@dimen/spacing_small</item>
+        <item name="android:layout_margin">@dimen/spacing_small</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+    </style>
+</resources>
