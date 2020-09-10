@@ -1,5 +1,6 @@
 package com.soufianekre.redpass.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -18,7 +19,6 @@ class SettingsActivity : BaseActivity(),SettingsMvp.View{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         ButterKnife.bind(this)
-
         setupUI()
         loadPrefFragment(SettingsFragment.newInstance())
     }
@@ -43,9 +43,9 @@ class SettingsActivity : BaseActivity(),SettingsMvp.View{
     override fun onBackPressed() {
         if (getCurrentFragment() is SecurityPref){
             showMessage("Security Pref")
-            (getCurrentFragment() as SecurityPref).onBackPressed()
+            supportFragmentManager.popBackStack();
         }else{
-            super.onBackPressed()
+            finish()
         }
 
     }
@@ -53,7 +53,12 @@ class SettingsActivity : BaseActivity(),SettingsMvp.View{
     public fun loadPrefFragment(fragment : Fragment){
         supportFragmentManager
             .beginTransaction().replace(R.id.settings_container,fragment)
+            .addToBackStack(null)
             .commit()
+    }
+
+    fun startActivity(intent: Intent){
+        startActivity(intent)
     }
     private fun getCurrentFragment() : Fragment? {
         return supportFragmentManager.findFragmentById(R.id.settings_container);

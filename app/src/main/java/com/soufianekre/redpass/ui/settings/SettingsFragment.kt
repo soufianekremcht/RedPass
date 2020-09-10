@@ -1,9 +1,12 @@
 package com.soufianekre.redpass.ui.settings
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.preference.Preference
 import com.soufianekre.redpass.R
+import com.soufianekre.redpass.data.app_pref.PrefConst.PREF_ABOUT
 import com.soufianekre.redpass.data.app_pref.PrefConst.PREF_SECURITY
+import com.soufianekre.redpass.ui.about.AboutActivity
 import com.soufianekre.redpass.ui.base.BasePreferenceFragment
 import com.soufianekre.redpass.ui.settings.security.SecurityPref
 
@@ -34,8 +37,9 @@ class SettingsFragment : BasePreferenceFragment() , Preference.OnPreferenceClick
     override fun onPreferenceClick(preference: Preference?): Boolean {
         when(preference!!.key){
             PREF_SECURITY -> getSettingsActivity().loadPrefFragment(SecurityPref.newInstance())
+            PREF_ABOUT -> getSettingsActivity().startActivity(Intent(activity,AboutActivity::class.java))
         }
-        return true;
+        return true
     }
 
 

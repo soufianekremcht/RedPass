@@ -49,7 +49,6 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "com.google.android.material:material:1.1.0"
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "androidx.preference:preference:1.1.1"
 
 
@@ -81,8 +80,22 @@ dependencies {
     // https://github.com/nulab/zxcvbn4j
     implementation 'com.nulab-inc:zxcvbn:1.2.3'
 
+    // about + License
+    implementation "com.mikepenz:aboutlibraries:8.3.0"
+    implementation 'com.github.daniel-stoneuk:material-about-library:3.1.2'
+
     // pattern lock
     implementation 'com.andrognito.patternlockview:patternlockview:1.0.0'
+
+    // icons
+    // icons
+    implementation 'com.mikepenz:iconics-core:3.0.3@aar'
+    implementation "com.mikepenz:iconics-views:3.0.3@aar"
+    implementation 'com.mikepenz:google-material-typeface:3.0.1.2.original@aar'
+    implementation 'com.mikepenz:community-material-typeface:2.0.46.1@aar'
+    implementation 'com.mikepenz:fontawesome-typeface:4.7.0.2@aar'
+
+
     // Optional, for RxJava2 adapter
     implementation 'com.andrognito.patternlockview:patternlockview-reactive:1.0.0'
 

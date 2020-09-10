@@ -2,7 +2,7 @@ package com.soufianekre.redpass.ui.settings
 
 import com.soufianekre.redpass.ui.base.mvp.BaseMvp
 
-class SettingsMvp{
+interface SettingsMvp{
     interface View : BaseMvp.View{
 
     }

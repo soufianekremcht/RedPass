@@ -24,8 +24,6 @@ import com.soufianekre.redpass.ui.password_editor.label_chooser.LabelChooserDial
 class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
 
 
-    //const
-
     private var LABEL_CHOOSER_DIALOG_TAG : String = "label_chooser_dialog"
     // widgets
 
@@ -76,7 +74,10 @@ class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
         ButterKnife.bind(this)
         mPresenter = PasswordEditorPresenter()
         mPresenter.onAttach(this)
-        checkIntent()
+        if (savedInstanceState == null)
+            checkIntent()
+        else
+            currentPasswordItem = savedInstanceState.getSerializable(PASSWORD_ITEM) as PasswordItem
         setupUi()
     }
 
@@ -106,6 +107,11 @@ class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
 
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(PASSWORD_ITEM,currentPasswordItem)
     }
 
     private fun checkIntent() {
@@ -218,7 +224,10 @@ class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
         }
     }
 
-
+    companion object {
+        //const
+        const val PASSWORD_ITEM = "password_item"
+    }
 
 
 }

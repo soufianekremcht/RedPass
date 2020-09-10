@@ -3,7 +3,7 @@ package com.soufianekre.redpass.ui.main
 import androidx.fragment.app.Fragment
 import com.soufianekre.redpass.ui.base.mvp.BaseMvp
 
-class MainMvp {
+interface MainMvp {
 
     interface  View :BaseMvp.View{
         fun openPasswordEditorActivity()

@@ -41,6 +41,10 @@
 
         <activity android:name="com.soufianekre.redpass.ui.settings.SettingsActivity"
             android:parentActivityName="com.soufianekre.redpass.ui.main.MainActivity"/>
+
+
+        <activity android:name=".ui.about.AboutActivity"
+            android:parentActivityName=".ui.settings.SettingsActivity"/>
     </application>
 
 </manifest>
