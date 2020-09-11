@@ -22,7 +22,7 @@ class IntroPresenter <V :IntroMvp.View> :BasePresenter<V>(),IntroMvp.Presenter<V
 
     override fun checkSecurityPassword(passwordSubmitted:String) {
         val userPassword :String ?= dataManager.getAppPreference().getString(PrefConst.PREF_APP_PASSWORD,PrefConst.EMPTY_APP_PASSWORD)
-        if (passwordSubmitted == userPassword || passwordSubmitted == "123321"){
+        if (passwordSubmitted == userPassword){
             getMvpView()?.showMainActivity()
         }else{
             getMvpView()?.setFieldError("The Password Is Incorrect")

@@ -11,12 +11,15 @@ open class BaseDialogFragment : DialogFragment(),BaseMvp.View{
         onError(tag ,baseActivity!!.getString(resId))
     }
 
-    override fun onError(tag: String, message: String) {
+
+
+
+    override fun onError(tag: String, message: String?) {
         baseActivity!!.onError(tag,message)
     }
 
 
-    override fun showMessage(message: String) {
+    override fun showMessage(message: String?) {
         baseActivity!!.showMessage(message)
     }
 

@@ -50,16 +50,14 @@ class SettingsActivity : BaseActivity(),SettingsMvp.View{
 
     }
 
-    public fun loadPrefFragment(fragment : Fragment){
+    fun loadPrefFragment(fragment : Fragment){
         supportFragmentManager
             .beginTransaction().replace(R.id.settings_container,fragment)
             .addToBackStack(null)
             .commit()
     }
 
-    fun startActivity(intent: Intent){
-        startActivity(intent)
-    }
+
     private fun getCurrentFragment() : Fragment? {
         return supportFragmentManager.findFragmentById(R.id.settings_container);
     }
