@@ -28,7 +28,7 @@ class PasswordListPresenter<V:PasswordListMvp.View>:BasePresenter<V>(),PasswordL
         compositeDisposable.add(dataManager.getAppDatabase().passwordItemDoa().getPasswordList()
             .compose(schedulerProvider.ioToMainFlowableScheduler())
             .subscribe({
-                var results : ArrayList<PasswordItem> = ArrayList()
+                val results : ArrayList<PasswordItem> = ArrayList()
                 if (label == null){
                     for (passwordItem in  it){
                         if (passwordItem.title.contains(query)) results.add(passwordItem)
@@ -52,9 +52,6 @@ class PasswordListPresenter<V:PasswordListMvp.View>:BasePresenter<V>(),PasswordL
 
         )
     }
-
-
-
     override fun onItemClicked(passwordItem : PasswordItem,position:Int) {
         if (getMvpView()?.getActionMode() != null){
             getMvpView()?.toggleItemSelection(position)

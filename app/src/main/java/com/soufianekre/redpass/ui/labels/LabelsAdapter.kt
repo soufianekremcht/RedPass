@@ -59,11 +59,18 @@ class LabelsAdapter(private var mContext : Context, private var labels : ArrayLi
                 labels.remove(label)
                 notifyItemRemoved(i)
         }
-
     }
+
     fun add(label :Label){
         labels.add(label)
         notifyItemInserted(labels.size- 1)
+    }
+
+    fun isLabelExisted(title : String) : Boolean{
+        labels.forEach {
+            if (title == it.name) return true
+        }
+        return false
     }
 
 

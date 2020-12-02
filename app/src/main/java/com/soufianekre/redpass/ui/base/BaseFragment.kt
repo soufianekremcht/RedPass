@@ -8,12 +8,12 @@ open class BaseFragment : Fragment(),BaseMvp.View{
     private val baseActivity : BaseActivity? = activity as? BaseActivity
 
 
-    override fun onError(tag: String, resId: Int) {
+    override fun showError(tag: String, resId: Int) {
         onError(tag ,baseActivity!!.getString(resId))
     }
 
-    override fun onError(tag: String, message: String?) {
-        baseActivity!!.onError(tag,message)
+    override fun showError(tag: String, message: String?) {
+        baseActivity!!.showError(tag,message)
     }
 
 

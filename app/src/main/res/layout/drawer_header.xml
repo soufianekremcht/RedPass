@@ -3,9 +3,11 @@
 <merge>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_normal"
+        android:layout_height="120dp"
+        android:padding="@dimen/spacing_small"
         android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:background="@color/black"
         >
 
     <ImageView
@@ -13,17 +15,23 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@mipmap/ic_launcher_round"
-        android:padding="@dimen/spacing_normal"
+        android:padding="@dimen/spacing_small"
+        android:layout_margin="@dimen/spacing_small"
+        android:layout_gravity="center"
         />
     <TextView
         android:id="@+id/drawer_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:text="@string/app_name"
-        android:textSize="@dimen/font_normal"
-        android:padding="@dimen/spacing_normal"
-        android:textStyle="bold"/>
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="@dimen/spacing_small"
+        android:fontFamily="sans-serif"
+        android:text="RED PASS"
+        android:textSize="@dimen/font_larger"
+        android:textStyle="bold|italic"
+        android:textColor="@color/white"
+        />
 
 
 

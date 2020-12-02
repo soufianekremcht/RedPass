@@ -1,12 +1,12 @@
 package com.soufianekre.redpass.helpers
 
-import android.content.Context
+import java.text.SimpleDateFormat
 
 object DateHelper {
 
-    fun format(context : Context,date :Long ,format :String ):String{
-
-        return ""
+    fun format(date: Long, format: String):String{
+        val simpleDateFormat = SimpleDateFormat(format)
+        return simpleDateFormat.format(date).toString()
 
     }
 }

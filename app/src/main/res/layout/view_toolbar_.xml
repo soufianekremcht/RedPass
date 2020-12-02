@@ -3,15 +3,17 @@
 <merge>
     <com.google.android.material.appbar.AppBarLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:theme="@style/AppTheme.ThemeOverLay"
+        >
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/app_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:title="@string/app_name"
-            app:titleTextColor="@color/white"
+            app:popupTheme="@style/AppTheme.PopUpOverLay"
             />
 
     </com.google.android.material.appbar.AppBarLayout>

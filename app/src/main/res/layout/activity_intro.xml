@@ -7,7 +7,7 @@
 
 
 
-    <include layout="@layout/toolbar_"/>
+    <include layout="@layout/view_toolbar_"/>
     <RelativeLayout
         android:id="@+id/user_password_layout"
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.soufianekre.redpass.ui.about
+package com.soufianekre.redpass.ui.settings.about
 
 
 

@@ -6,5 +6,4 @@ import com.soufianekre.redpass.data.db.AppDatabase
 interface DataManager{
 
     fun getAppDatabase() : AppDatabase
-    fun getAppPreference(): AppPreferenceHelper
 }

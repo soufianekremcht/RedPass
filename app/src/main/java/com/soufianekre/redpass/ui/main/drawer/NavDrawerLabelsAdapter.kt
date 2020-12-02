@@ -1,4 +1,4 @@
-package com.soufianekre.redpass.ui.main.drawer.adapters
+package com.soufianekre.redpass.ui.main.drawer
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,19 +10,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.db.models.Label
-import com.soufianekre.redpass.helpers.AppHelper
-import kotlinx.android.synthetic.main.drawer_item_label.view.*
+import kotlinx.android.synthetic.main.item_drawer_label.view.*
 
-class DrawerLabelsAdapter (private var mContext : Context,
-                           private var labels : ArrayList<Label>,
-                           var listener: DrawerLabelsAdapterListener?)
-    : RecyclerView.Adapter<DrawerLabelsAdapter.DrawerLabelViewHolder>() {
+class NavDrawerLabelsAdapter (private var mContext : Context,
+                              private var labels : ArrayList<Label>,
+                              var listener: DrawerLabelsAdapterListener?)
+    : RecyclerView.Adapter<NavDrawerLabelsAdapter.DrawerLabelViewHolder>() {
 
     var selectedItemPosition : Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrawerLabelViewHolder {
         val view = LayoutInflater.from(mContext)
-            .inflate(R.layout.drawer_item_label, parent, false)
+            .inflate(R.layout.item_drawer_label, parent, false)
 
         return DrawerLabelViewHolder(view)
     }
@@ -34,13 +33,12 @@ class DrawerLabelsAdapter (private var mContext : Context,
     override fun onBindViewHolder(holder: DrawerLabelViewHolder, position: Int) {
         val label = labels[position]
         holder.labelText.text = label.name
-        holder.labelIcon.setColorFilter(AppHelper.getRandomMaterialColor(mContext, 400))
         if (selectedItemPosition == position){
-            holder.itemView.setBackgroundResource(R.color.colorPrimary)
-            holder.labelText.setTextColor(ContextCompat.getColor(mContext, R.color.white))
+            holder.itemView.setBackgroundResource(R.color.drawer_selection_color)
+            holder.labelIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.accent_red))
         }else{
-            holder.itemView.setBackgroundResource(R.color.white)
-            holder.labelText.setTextColor(ContextCompat.getColor(mContext, R.color.holo_dark_action_mode))
+            holder.itemView.setBackgroundColor(android.R.attr.selectableItemBackground)
+
         }
 
         setListeners(holder, position)

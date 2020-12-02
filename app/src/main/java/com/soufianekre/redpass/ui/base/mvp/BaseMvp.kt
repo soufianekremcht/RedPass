@@ -6,9 +6,9 @@ import androidx.annotation.StringRes
 class BaseMvp {
 
     interface View{
-        fun onError(tag:String,@StringRes resId: Int)
+        fun showError(tag:String, @StringRes resId: Int)
 
-        fun onError(tag:String,message: String?)
+        fun showError(tag:String, message: String?)
 
         fun showMessage(message: String?)
 

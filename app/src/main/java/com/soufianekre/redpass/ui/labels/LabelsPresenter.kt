@@ -13,7 +13,7 @@ class LabelsPresenter<V : LabelsMvp.View> :BasePresenter<V>(),LabelsMvp.Presente
             .subscribe ({
                 getMvpView()?.onItemInserted(label)
             },{
-                getMvpView()?.onError("LabelPresenter",it.localizedMessage)
+                getMvpView()?.showError("LabelPresenter",it.localizedMessage)
             })
 
         )
@@ -25,7 +25,7 @@ class LabelsPresenter<V : LabelsMvp.View> :BasePresenter<V>(),LabelsMvp.Presente
             .subscribe ({
                 getMvpView()?.updateAdapter(it)
             },{
-                getMvpView()?.onError("LabelPresenter",it.localizedMessage)
+                getMvpView()?.showError("LabelPresenter",it.localizedMessage)
             })
 
         )

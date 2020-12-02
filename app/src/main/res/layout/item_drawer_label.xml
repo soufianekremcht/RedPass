@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    style="@style/style_drawer_item_layout">
+    android:layout_height="50dp"
+    style="@style/style_drawer_item_layout"
+    android:background="?selectableItemBackground">
 
     <ImageView
         android:id="@+id/drawer_item_label_icon"

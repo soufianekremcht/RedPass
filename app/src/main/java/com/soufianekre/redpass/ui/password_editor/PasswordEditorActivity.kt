@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.google.android.material.chip.Chip
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.data.db.models.PasswordItem
@@ -31,8 +32,8 @@ class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
     lateinit var toolbar : Toolbar
 
 
-    @BindView(R.id.pass_chosen_category)
-    lateinit var passwordEditorChosenLabel : TextView
+    @BindView(R.id.chip_password_label)
+    lateinit var passwordEditorChosenLabel : Chip
 
     @BindView(R.id.pass_title_field)
     lateinit var passwordEditorTitleField:EditText

@@ -12,7 +12,7 @@ class LabelChooserPresenter<V : LabelChooserMvp.View> : BasePresenter<V>(),Label
                 getMvpView()?.showLabels(ArrayList(it))
             },{
                 if (it.localizedMessage != null)
-                getMvpView()?.onError("LabelPresenter",it.localizedMessage)
+                getMvpView()?.showError("LabelPresenter",it.localizedMessage)
             })
 
         )

@@ -2,19 +2,16 @@ package com.soufianekre.redpass.ui.main.drawer
 
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.ui.base.mvp.BaseMvp
-import com.soufianekre.redpass.ui.main.drawer.adapters.DrawerLabelsAdapter
 
-class DrawerMvp{
-    interface View :BaseMvp.View{
+class NavDrawerMvp{
+    interface View :BaseMvp.View,NavDrawerLabelsAdapter.DrawerLabelsAdapterListener{
         fun buildLabelsMenu(labelList:List<Label>)
-        fun openLabelsActivity()
+        fun showLabelsActivity()
         fun loadPasswordItemList(label:Label)
         fun showPasswordListFragment()
+        fun showSettings()
     }
-    interface Presenter<V : View>:BaseMvp.Presenter<V>,DrawerLabelsAdapter.DrawerLabelsAdapterListener{
+    interface Presenter<V : View>:BaseMvp.Presenter<V>{
         fun getLabels()
-        fun onDrawerItemClicked(item : Int)
-
-
     }
 }

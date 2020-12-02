@@ -36,7 +36,7 @@ object KeyboardUtils {
             edit.isFocusable = true
             edit.isFocusableInTouchMode = true
             if (edit.inputType == InputType.TYPE_TEXT_VARIATION_PASSWORD)
-                edit.inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
+                edit.inputType = InputType.TYPE_CLASS_NUMBER
             else
                 edit.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
             edit.requestFocus()

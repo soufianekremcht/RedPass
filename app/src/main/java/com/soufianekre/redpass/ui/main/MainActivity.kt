@@ -18,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.ui.base.BaseActivity
-import com.soufianekre.redpass.ui.main.drawer.AppNavigationDrawerFragment
+import com.soufianekre.redpass.ui.main.drawer.NavDrawerFragment
 import com.soufianekre.redpass.ui.password_editor.PasswordEditorActivity
 import com.soufianekre.redpass.ui.passwords.PasswordListFragment
 import com.soufianekre.redpass.ui.settings.SettingsActivity
@@ -30,7 +30,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     private val FRAGMENT_DRAWER_TAG: String = "fragment_drawer_tag"
 
 
-    @BindView(R.id.main_toolbar)
+    @BindView(R.id.app_toolbar)
     lateinit var mainToolbar : Toolbar
 
     @BindView(R.id.password_add_fab)
@@ -61,6 +61,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     override fun onDestroy() {
         super.onDestroy()
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         val searchManager : SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -84,11 +85,11 @@ class MainActivity :BaseActivity() ,MainMvp.View{
 
     override fun loadFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
+            /*.setCustomAnimations(
                 R.anim.anim_in,
                 R.anim.anim_out,
                 R.anim.anim_in_pop,
-                R.anim.anim_out_pop)
+                R.anim.anim_out_pop)*/
             .replace(R.id.fragment_container,fragment)
             .commit()
     }
@@ -114,11 +115,11 @@ class MainActivity :BaseActivity() ,MainMvp.View{
         setSupportActionBar(mainToolbar)
 
         val mNavigationDrawerFragment = supportFragmentManager.findFragmentById(R.id.main_nav_view)
-                as AppNavigationDrawerFragment?
+                as NavDrawerFragment?
         if (mNavigationDrawerFragment == null) {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(
-                R.id.main_nav_view, AppNavigationDrawerFragment.newInstance(),
+                R.id.main_nav_view, NavDrawerFragment.newInstance(),
                 FRAGMENT_DRAWER_TAG
             ).commit()
         }
@@ -148,5 +149,11 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     }
 
 
-
+    override fun onBackPressed() {
+        if (searchView!!.isIconified){
+            searchView!!.isIconified = false;
+        }else{
+            super.onBackPressed()
+        }
+    }
 }

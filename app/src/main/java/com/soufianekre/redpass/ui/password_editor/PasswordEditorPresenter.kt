@@ -16,7 +16,7 @@ class PasswordEditorPresenter<V : PasswordEditorMvp.View> :BasePresenter<V>(),Pa
                 getMvpView()?.showMessage("You Add The Account Successfully")
             },{
                 getMvpView()?.showMessage(it.localizedMessage)
-                getMvpView()?.onError("PassEditPresenter",it.localizedMessage)
+                getMvpView()?.showError("PassEditPresenter",it.localizedMessage)
             })
 
         )
@@ -30,7 +30,7 @@ class PasswordEditorPresenter<V : PasswordEditorMvp.View> :BasePresenter<V>(),Pa
                 getMvpView()?.showMessage("You Add The Account Successfully")
             },{
                 getMvpView()?.showMessage(it.localizedMessage)
-                getMvpView()?.onError("PassEditPresenter",it.localizedMessage)
+                getMvpView()?.showError("PassEditPresenter",it.localizedMessage)
             })
 
         )

@@ -20,12 +20,12 @@ import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.ui.base.BaseFragment
 import com.soufianekre.redpass.ui.labels.LabelsActivity
 import com.soufianekre.redpass.ui.main.MainActivity
-import com.soufianekre.redpass.ui.main.drawer.adapters.DrawerLabelsAdapter
 import com.soufianekre.redpass.ui.passwords.PasswordListFragment
-import kotlinx.android.synthetic.main.nav_drawer_fragment.view.*
+import com.soufianekre.redpass.ui.settings.SettingsActivity
+import kotlinx.android.synthetic.main.fragment_nav_drawer.view.*
 
 
-class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
+class NavDrawerFragment: BaseFragment(),NavDrawerMvp.View{
 
 
     private val NAV_VIEW_FRAGMENT_TAG: String? = "nav_view_fragment"
@@ -40,24 +40,21 @@ class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
     lateinit var editLabels : View
     @BindView(R.id.left_drawer)
     lateinit var leftDrawer:View
-
-
     @BindView(R.id.drawer_labels_list_view)
     lateinit var drawerLabelsListView : RecyclerView
 
-    lateinit var drawerLabelAdapter : DrawerLabelsAdapter
-
-
+    private lateinit var drawerLabelAdapter : NavDrawerLabelsAdapter
     var mDrawerToggle: ActionBarDrawerToggle? = null
     var mDrawerLayout: DrawerLayout? = null
     private var mActivity: MainActivity? = null
+
     private val alreadyInitialized: Boolean = false
 
-    lateinit var mPresenter: DrawerPresenter<DrawerMvp.View>
+    lateinit var mPresenter: NavDrawerPresenter<NavDrawerMvp.View>
 
     companion object{
-        fun newInstance(): AppNavigationDrawerFragment{
-            val fragment = AppNavigationDrawerFragment()
+        fun newInstance(): NavDrawerFragment{
+            val fragment = NavDrawerFragment()
             val bundle = Bundle()
             fragment.arguments = bundle
             return fragment
@@ -69,11 +66,26 @@ class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
         container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
-        drawer_view= inflater.inflate(R.layout.nav_drawer_fragment,container,false)
-        mPresenter = DrawerPresenter()
+        drawer_view= inflater.inflate(R.layout.fragment_nav_drawer,container,false)
+        mPresenter = NavDrawerPresenter()
         mPresenter.onAttach(this)
         ButterKnife.bind(this,drawer_view)
         return drawer_view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        drawerLabelAdapter =
+            NavDrawerLabelsAdapter(
+                requireActivity(),
+                ArrayList(),
+                this
+            )
+        drawerLabelsListView.setHasFixedSize(true)
+
+        drawerLabelsListView.layoutManager = LinearLayoutManager(requireActivity(),VERTICAL,false)
+        drawerLabelsListView.adapter = drawerLabelAdapter
+        setListeners()
     }
 
 
@@ -93,37 +105,20 @@ class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
         mPresenter.onDetach()
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        drawerLabelAdapter =
-            DrawerLabelsAdapter(
-                requireActivity(),
-                ArrayList(),
-                mPresenter
-            )
-        drawerLabelsListView.setHasFixedSize(true)
-
-        drawerLabelsListView.layoutManager = LinearLayoutManager(requireActivity(),VERTICAL,false)
-        drawerLabelsListView.adapter = drawerLabelAdapter
-
-
-        setListeners()
-    }
-
-    override fun loadPasswordItemList(label: Label) {
-        getMainActivity().loadFragment(PasswordListFragment.newInstance(label))
-        getMainActivity().getDrawerLayout().closeDrawer(GravityCompat.START)
-
-    }
-
     override fun buildLabelsMenu(labelList : List<Label>) {
         drawerLabelAdapter.addAll(labelList)
         mDrawerToggle!!.syncState()
     }
 
-    override fun openLabelsActivity(){
+
+    override fun loadPasswordItemList(label: Label) {
+        getMainActivity().loadFragment(PasswordListFragment.newInstance(label))
+        getMainActivity().getDrawerLayout().closeDrawer(GravityCompat.START)
+    }
+
+
+
+    override fun showLabelsActivity(){
         val intent = Intent(requireContext(),LabelsActivity::class.java)
         startActivity(intent)
         getMainActivity().getDrawerLayout().closeDrawer(GravityCompat.START)
@@ -138,6 +133,18 @@ class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
 
     }
 
+    override fun showSettings() {
+        val intent = Intent(activity,SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onLabelClicked(label: Label) {
+
+    }
+
+    override fun onLabelLongClicked(label: Label): Boolean {
+        return false
+    }
 
 
     private fun init(){
@@ -149,7 +156,7 @@ class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
             10
         )
 
-        // ActionBarDrawerToggle± ties together the the proper interactions
+        // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
         mDrawerToggle = object : ActionBarDrawerToggle(
             mActivity,
@@ -161,15 +168,8 @@ class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
                 super.onDrawerOpened(drawerView)
                 getMainActivity().invalidateOptionsMenu()
             }
-
         }
 
-//        if (isDoublePanelActive()) {
-//            mDrawerLayout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
-//        }
-
-        // Styling options
-        //mDrawerLayout!!.setDrawerShadow(drawable.drawer_shadow, GravityCompat.START)
         mDrawerLayout!!.addDrawerListener(mDrawerToggle as ActionBarDrawerToggle)
         (mDrawerToggle as ActionBarDrawerToggle).isDrawerIndicatorEnabled = true
 
@@ -184,29 +184,23 @@ class AppNavigationDrawerFragment: BaseFragment(),DrawerMvp.View{
 
     }
 
-
     private fun buildMainMenu() {
         drawer_view.drawer_item_settings.setOnClickListener{
-            mPresenter.onDrawerItemClicked(it.id)
+            showSettings()
         }
-
     }
-
-
 
     private fun getMainActivity(): MainActivity {
         return (activity as MainActivity?)!!
     }
 
-
-
-
     private fun setListeners(){
+
         editLabels.setOnClickListener{
-            mPresenter.onDrawerItemClicked(editLabels.id)
+            showLabelsActivity()
         }
         showAll.setOnClickListener{
-            mPresenter.onDrawerItemClicked(showAll.id)
+            showPasswordListFragment()
         }
     }
 

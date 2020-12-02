@@ -15,7 +15,7 @@ import butterknife.ButterKnife
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.ui.base.BaseDialogFragment
-import com.soufianekre.redpass.ui.main.drawer.adapters.DrawerLabelsAdapter
+import com.soufianekre.redpass.ui.main.drawer.NavDrawerLabelsAdapter
 import com.soufianekre.redpass.ui.password_editor.PasswordEditorActivity
 
 class LabelChooserDialog : BaseDialogFragment(),LabelChooserMvp.View {
@@ -29,7 +29,7 @@ class LabelChooserDialog : BaseDialogFragment(),LabelChooserMvp.View {
 
     private lateinit var passwordEditorActivity: PasswordEditorActivity
     private var mPresenter : LabelChooserPresenter<LabelChooserMvp.View>? = null
-    private lateinit var labelsAdapter : DrawerLabelsAdapter
+    private lateinit var labelsAdapter : NavDrawerLabelsAdapter
 
 
 
@@ -60,7 +60,12 @@ class LabelChooserDialog : BaseDialogFragment(),LabelChooserMvp.View {
         labelChooserRecyclerView.layoutManager = LinearLayoutManager(requireContext()
                 ,VERTICAL,false)
 
-        labelsAdapter = DrawerLabelsAdapter(requireContext(),ArrayList(),mPresenter)
+        labelsAdapter =
+            NavDrawerLabelsAdapter(
+                requireContext(),
+                ArrayList(),
+                mPresenter
+            )
         labelChooserRecyclerView.adapter = labelsAdapter
         mPresenter!!.getLabels()
 

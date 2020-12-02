@@ -3,21 +3,22 @@
 
     <style name="style_drawer_item_layout">
         <item name="android:background">?selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
     </style>
     <style name="style_drawer_img">
         <item name="android:padding">@dimen/spacing_small</item>
-        <item name="android:layout_margin">@dimen/spacing_normal</item>
+        <item name="android:layout_margin">@dimen/spacing_small</item>
 
     </style>
     <style name="style_drawer_field">
-        <item name="android:padding">@dimen/spacing_normal</item>
+        <item name="android:padding">@dimen/spacing_small</item>
         <item name="android:layout_margin">@dimen/spacing_small</item>
         <item name="android:textSize">@dimen/font_normal</item>
     </style>
 
     <style name="style_drawer_text">
         <item name="android:padding">@dimen/spacing_small</item>
-
         <item name="android:textSize">@dimen/font_normal</item>
     </style>
 </resources>

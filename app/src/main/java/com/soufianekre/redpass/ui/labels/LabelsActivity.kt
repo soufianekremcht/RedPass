@@ -30,14 +30,11 @@ class LabelsActivity :BaseActivity(),LabelsMvp.View{
     @BindView(R.id.labels_add_label_btn)
     lateinit var addLabelImgBtn : ImageView
 
-
     @BindView(R.id.labels_recycler_view)
     lateinit var labelsRecyclerView: RecyclerView
 
     @BindView(R.id.labels_empty_view)
     lateinit var labelEmptyView :RelativeLayout
-
-
 
     private  var labelAdapter: LabelsAdapter? = null
 
@@ -59,30 +56,29 @@ class LabelsActivity :BaseActivity(),LabelsMvp.View{
 
     private fun setupUi(){
         //toolbar
-        appToolbar.title = "Edit Label"
+        appToolbar.title = getString(R.string.edit_label)
         appToolbar.setOnClickListener{
             onBackPressed()
         }
         setSupportActionBar(appToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-
-        addLabelImgBtn.setOnClickListener{
-            mPresenter.addLabel(addLabelField.text.toString())
-            addLabelField.text.clear()
-
-        }
-
         //recyclerView
         labelAdapter = LabelsAdapter(this,ArrayList(),mPresenter)
         labelsRecyclerView.itemAnimator = DefaultItemAnimator()
         labelsRecyclerView.layoutManager = LinearLayoutManager(this,VERTICAL,false)
         labelsRecyclerView.addItemDecoration(CustomDividerItemDecoration(this, VERTICAL))
-
         labelsRecyclerView.adapter = labelAdapter
-
         mPresenter.getLabels()
 
+
+        addLabelImgBtn.setOnClickListener{
+            val newLabelName = addLabelField.text.trim().toString()
+            if (newLabelName.isNotEmpty() && !labelAdapter!!.isLabelExisted(newLabelName))
+                mPresenter.addLabel(newLabelName)
+            addLabelField.text.clear()
+
+        }
 
 
     }
@@ -93,7 +89,7 @@ class LabelsActivity :BaseActivity(),LabelsMvp.View{
     }
 
     private fun checkEmptyView(){
-        showMessage(""+labelAdapter!!.itemCount)
+        showMessage("${labelAdapter!!.itemCount}")
         if(labelAdapter!!.itemCount>0){
             labelsRecyclerView.visibility = View.VISIBLE
             labelEmptyView.visibility = View.GONE

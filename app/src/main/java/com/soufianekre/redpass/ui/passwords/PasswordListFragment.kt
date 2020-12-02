@@ -125,17 +125,16 @@ class PasswordListFragment :BaseFragment(),PasswordListMvp.View{
 
     override fun toggleItemSelection(position:Int){
         passwordAdapter.toggleSelection(position)
-        if(passwordAdapter.getSelectedItemCount()>0){
-            actionMode?.title = passwordAdapter.getSelectedItemCount().toString()
-            actionMode?.invalidate()
-        }else{
+        val count = passwordAdapter.getSelectedItemCount();
+        if(count == 0){
             actionMode?.finish()
-            actionMode = null
+        }else{
+            actionMode?.title = count.toString()
+            actionMode?.invalidate()
         }
     }
 
     // Action Mode
-
     override fun getActionMode(): ActionMode? {
         return actionMode
     }
