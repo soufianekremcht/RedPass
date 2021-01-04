@@ -1,19 +1,17 @@
 package com.soufianekre.redpass.data
 
 import android.content.Context
-import android.content.SharedPreferences
 /*import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys*/
-import com.soufianekre.redpass.MyApp
-import com.soufianekre.redpass.data.app_pref.AppPreferenceHelper
-import com.soufianekre.redpass.data.db.AppDatabase
+import com.soufianekre.redpass.RedPassApp
+import com.soufianekre.redpass.data.db.RoomDb
 
 
 class AppDataManager() :DataManager{
 
 
 
-    private val appContext: Context = MyApp.getContext()
+    private val appContext: Context = RedPassApp.getContext()
 
     init {
         /*   val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
@@ -27,8 +25,8 @@ class AppDataManager() :DataManager{
     }
 
 
-    override fun getAppDatabase(): AppDatabase {
-        return AppDatabase.getInstance(appContext)
+    override fun getAppDatabase(): RoomDb {
+        return RoomDb.getInstance(appContext)
     }
 
 }

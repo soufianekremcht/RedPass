@@ -181,7 +181,7 @@ class PasswordListFragment :BaseFragment(),PasswordListMvp.View{
             mode: ActionMode?,
             menu: Menu?
         ): Boolean {
-            mode!!.menuInflater.inflate(R.menu.menu_action,menu)
+            mode!!.menuInflater.inflate(R.menu.action,menu)
             passwordAdapter.selection_mode =true
             changeStatusBarColor(ColorsHelper.getColor(getMainActivity()!!,R.color.holo_dark_action_mode))
             getMainActivity()?.getFab()!!.hide()

@@ -2,6 +2,7 @@ package com.soufianekre.redpass.ui.password_editor.label_chooser
 
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.ui.base.mvp.BasePresenter
+import timber.log.Timber
 
 class LabelChooserPresenter<V : LabelChooserMvp.View> : BasePresenter<V>(),LabelChooserMvp.Presenter<V>{
 
@@ -12,7 +13,7 @@ class LabelChooserPresenter<V : LabelChooserMvp.View> : BasePresenter<V>(),Label
                 getMvpView()?.showLabels(ArrayList(it))
             },{
                 if (it.localizedMessage != null)
-                getMvpView()?.showError("LabelPresenter",it.localizedMessage)
+                Timber.e(it.localizedMessage)
             })
 
         )
@@ -20,10 +21,6 @@ class LabelChooserPresenter<V : LabelChooserMvp.View> : BasePresenter<V>(),Label
 
     override fun onLabelClicked(label: Label) {
         getMvpView()!!.setPasswordItemLabel(label)
-    }
-
-    override fun onLabelLongClicked(label: Label): Boolean {
-        return false
     }
 
 

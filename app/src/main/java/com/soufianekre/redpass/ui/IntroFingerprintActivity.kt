@@ -1,20 +1,19 @@
 package com.soufianekre.redpass.ui
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.ajalt.reprint.core.AuthenticationFailureReason
 import com.github.ajalt.reprint.core.AuthenticationListener
 import com.github.ajalt.reprint.core.Reprint
-import com.google.android.material.dialog.MaterialDialogs
-import com.soufianekre.redpass.MyApp
+import com.soufianekre.redpass.RedPassApp
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.app_pref.PrefConst
 import com.soufianekre.redpass.ui.base.BaseActivity
 import com.soufianekre.redpass.ui.intro.IntroActivity
 import com.soufianekre.redpass.ui.main.MainActivity
+import timber.log.Timber
 
 class IntroFingerprintActivity : BaseActivity() {
 
@@ -26,7 +25,7 @@ class IntroFingerprintActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_finger_print)
         val activity = this
-        if (!MyApp.getPref().getBoolean(PrefConst.PREF_SECURITY_FINGER_PRINT_LOCK,false)){
+        if (!RedPassApp.getPref().getBoolean(PrefConst.PREF_SECURITY_FINGER_PRINT_LOCK,false)){
             val intent  = Intent (this,IntroActivity::class.java)
             startActivity(intent)
             finish()
@@ -45,7 +44,8 @@ class IntroFingerprintActivity : BaseActivity() {
                         errorMessage: CharSequence?,
                         moduleTag: Int,
                         errorCode: Int) {
-                        showError("FingerPrintActivity","Error : $errorCode")
+                        showError("Error : $errorCode")
+                        Timber.e("Error $errorCode")
                     }
                 })
 

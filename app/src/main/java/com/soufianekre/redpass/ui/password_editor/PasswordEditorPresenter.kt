@@ -2,6 +2,7 @@ package com.soufianekre.redpass.ui.password_editor
 
 import com.soufianekre.redpass.data.db.models.PasswordItem
 import com.soufianekre.redpass.ui.base.mvp.BasePresenter
+import timber.log.Timber
 
 class PasswordEditorPresenter<V : PasswordEditorMvp.View> :BasePresenter<V>(),PasswordEditorMvp.Presenter<V>{
 
@@ -16,7 +17,7 @@ class PasswordEditorPresenter<V : PasswordEditorMvp.View> :BasePresenter<V>(),Pa
                 getMvpView()?.showMessage("You Add The Account Successfully")
             },{
                 getMvpView()?.showMessage(it.localizedMessage)
-                getMvpView()?.showError("PassEditPresenter",it.localizedMessage)
+                Timber.e(it.localizedMessage)
             })
 
         )
@@ -30,7 +31,7 @@ class PasswordEditorPresenter<V : PasswordEditorMvp.View> :BasePresenter<V>(),Pa
                 getMvpView()?.showMessage("You Add The Account Successfully")
             },{
                 getMvpView()?.showMessage(it.localizedMessage)
-                getMvpView()?.showError("PassEditPresenter",it.localizedMessage)
+                Timber.e(it.localizedMessage)
             })
 
         )

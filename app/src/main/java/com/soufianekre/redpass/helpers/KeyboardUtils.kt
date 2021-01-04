@@ -31,14 +31,21 @@ object KeyboardUtils {
 
     }
 
-    fun switchToNumeric(context: Context, edit: EditText) {
+    fun switchToNumeric(context: Context, edit: EditText,callback : (isNumeric :Boolean) ->Unit) {
+        var isNumeric : Boolean =false
         if (edit.requestFocus()) {
             edit.isFocusable = true
             edit.isFocusableInTouchMode = true
-            if (edit.inputType == InputType.TYPE_TEXT_VARIATION_PASSWORD)
+            if (edit.inputType == InputType.TYPE_TEXT_VARIATION_PASSWORD){
                 edit.inputType = InputType.TYPE_CLASS_NUMBER
-            else
+                isNumeric =true
+            } else{
                 edit.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                isNumeric =false
+
+            }
+
+            callback.invoke(isNumeric)
             edit.requestFocus()
             val imm = context
                 .getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager

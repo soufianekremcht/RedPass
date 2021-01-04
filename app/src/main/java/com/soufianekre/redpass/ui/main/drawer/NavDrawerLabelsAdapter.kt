@@ -1,6 +1,7 @@
 package com.soufianekre.redpass.ui.main.drawer
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.db.models.Label
+import com.soufianekre.redpass.helpers.AppHelper
 import kotlinx.android.synthetic.main.item_drawer_label.view.*
 
 class NavDrawerLabelsAdapter (private var mContext : Context,
@@ -33,14 +35,7 @@ class NavDrawerLabelsAdapter (private var mContext : Context,
     override fun onBindViewHolder(holder: DrawerLabelViewHolder, position: Int) {
         val label = labels[position]
         holder.labelText.text = label.name
-        if (selectedItemPosition == position){
-            holder.itemView.setBackgroundResource(R.color.drawer_selection_color)
-            holder.labelIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.accent_red))
-        }else{
-            holder.itemView.setBackgroundColor(android.R.attr.selectableItemBackground)
-
-        }
-
+        holder.labelIcon.setColorFilter(AppHelper.getRandomMaterialColor(mContext,400))
         setListeners(holder, position)
     }
 
@@ -50,14 +45,6 @@ class NavDrawerLabelsAdapter (private var mContext : Context,
             listener?.onLabelClicked(labels[position])
             notifyDataSetChanged()
         }
-        holder.itemView.setOnLongClickListener {
-            if (listener == null)
-                return@setOnLongClickListener false
-            else
-                listener!!.onLabelLongClicked(labels[position])
-
-        }
-
     }
 
     fun addAll(labelList: List<Label>) {
@@ -88,6 +75,5 @@ class NavDrawerLabelsAdapter (private var mContext : Context,
 
     interface DrawerLabelsAdapterListener {
         fun onLabelClicked(label:Label)
-        fun onLabelLongClicked(label :Label): Boolean
     }
 }

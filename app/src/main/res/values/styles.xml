@@ -51,6 +51,20 @@
         <item name="chipBackgroundColor">@android:color/transparent</item>
     </style>
 
+    <style name="TextAppearance.RedPass.ListPrimary" parent="TextAppearance.MaterialComponents.Body1">
+<!--        <item name="android:fontFamily">@font/google_sans_medium</item>-->
+        <item name="android:letterSpacing">0</item>
+<!--        <item name="fontFamily">@font/google_sans_medium</item>-->
+    </style>
+
+    <style name="TextAppearance.RedPass.CollapsibleCard" parent="TextAppearance.RedPass.ListPrimary">
+    </style>
+
+    <style name="Widget.RedPass" parent="@android:style/Widget.Material" />
+    <style name="Widget.RedPass.MultilineBody">
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
 
     <dimen name="chip_corner_radius">3dp</dimen>
 </resources>

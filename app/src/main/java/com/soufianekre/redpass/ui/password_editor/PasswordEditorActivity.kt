@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -92,7 +91,7 @@ class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_password_editor,menu)
+        menuInflater.inflate(R.menu.password_editor,menu)
         return true
     }
 

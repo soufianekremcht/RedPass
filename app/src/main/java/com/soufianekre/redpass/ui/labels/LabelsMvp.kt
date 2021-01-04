@@ -10,7 +10,7 @@ class LabelsMvp{
         fun onItemDeleted(label : Label)
     }
     interface Presenter<V : View> : BaseMvp.Presenter<V>,LabelsAdapter.LabelsAdapterListener{
-        fun addLabel(name:String)
+        fun addLabel(name:String,color:Int)
         fun getLabels()
         fun deleteLabel(label: Label)
     }

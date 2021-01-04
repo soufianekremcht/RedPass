@@ -77,14 +77,16 @@ class AppPasswordActivity : BaseActivity(),IntroMvp.View{
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_intro,menu)
+        menuInflater.inflate(R.menu.intro,menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.intro_menu_keyboard ->{
-                KeyboardUtils.switchToNumeric(this,passwordField)
+                KeyboardUtils.switchToNumeric(this,passwordField){
+                    showMessage("The keyboard switched to ${(if (it) "Numeric" else "AlpaNumeric")}")
+                }
                 return true
             }
         }

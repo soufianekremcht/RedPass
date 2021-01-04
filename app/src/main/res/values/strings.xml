@@ -10,4 +10,8 @@
 </string>
     <string name="edit_label">Edit Label</string>
     <string name="now">Now</string>
+    <string name="expanded">Expanded</string>
+    <string name="collapsed">Collapsed</string>
+    <string name="colors">Colors</string>
+    <string name="select">Select</string>
 </resources>

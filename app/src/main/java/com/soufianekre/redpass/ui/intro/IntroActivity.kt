@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.soufianekre.redpass.R
+import com.soufianekre.redpass.RedPassApp
 import com.soufianekre.redpass.data.app_pref.PrefConst
 import com.soufianekre.redpass.helpers.KeyboardUtils
 import com.soufianekre.redpass.ui.base.BaseActivity
@@ -48,13 +49,10 @@ class IntroActivity :BaseActivity(),IntroMvp.View{
         mPresenter = IntroPresenter()
         mPresenter.onAttach(this)
 
-        if (mPresenter.dataManager.getAppPreference().getBoolean(PrefConst.PREF_IS_FIRST_LAUNCH ,true)){
-            mPresenter.dataManager.getAppPreference().set(PrefConst.PREF_IS_FIRST_LAUNCH,false)
+        if (RedPassApp.getPref().getBoolean(PrefConst.PREF_IS_FIRST_LAUNCH ,true)){
+            RedPassApp.getPref().set(PrefConst.PREF_IS_FIRST_LAUNCH,false)
             showAppPasswordActivity()
             finish()
-        }else{
-
-
         }
 
         setupUi()
@@ -88,14 +86,16 @@ class IntroActivity :BaseActivity(),IntroMvp.View{
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_intro,menu)
+        menuInflater.inflate(R.menu.intro,menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.intro_menu_keyboard ->{
-                KeyboardUtils.switchToNumeric(this,passwordField)
+                KeyboardUtils.switchToNumeric(this,passwordField){
+                    showMessage("The keyboard switched to ${(if (it) "Numeric" else "AlpaNumeric")}")
+                }
                 return true
             }
         }

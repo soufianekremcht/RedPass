@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/left_drawer"
@@ -18,41 +19,75 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/divider"/>
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/spacing_small">
 
-            <RelativeLayout
+            <com.soufianekre.redpass.ui.main.drawer.CollapsibleCard
                 android:id="@+id/drawer_item_all"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/style_drawer_item_layout">
-                <ImageView
-                    android:id="@+id/drawer_all_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_list_dark"
-                    style="@style/style_drawer_img"
-                    />
-                <TextView
-                    android:id="@+id/drawer_all_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/drawer_all_icon"
-                    android:text="All"
-                    android:textColor="@color/black"
-                    style="@style/style_drawer_text"
-                    />
-            </RelativeLayout>
+                app:cardTitle="Show All"
+                app:cardDescription="Show All Items in the list"
+                />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/drawer_labels_list_view"
+
+            <LinearLayout
+                android:id="@+id/drawer_item_labels"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/drawer_labels_title_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    style="@style/style_drawer_item_layout">
+                    <ImageView
+                        android:id="@+id/drawer_labels_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_list_dark"
+                        style="@style/style_drawer_img"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView
+                        android:id="@+id/drawer_labels_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Labels"
+                        style="@style/style_drawer_text"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <ImageView
+                        android:id="@+id/drawer_labels_expand_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_expand_more"
+                        style="@style/style_drawer_img"
+                        />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/drawer_labels_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_small"
+                    android:paddingStart="30dp"
+                    android:visibility="gone"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+
+
+
 
             <View
                 android:layout_width="match_parent"
@@ -79,9 +114,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/drawer_edit_labels_icon"
-                    android:text="Edit Labels"
+                    android:text="Manage Labels"
                     style="@style/style_drawer_text"
                     />
+
+
             </RelativeLayout>
 
             <RelativeLayout

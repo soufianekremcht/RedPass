@@ -21,8 +21,15 @@ import com.soufianekre.redpass.R
 
 
 class AboutActivity : MaterialAboutActivity() {
+    override fun getActivityTitle(): CharSequence? {
+        return "About"
+    }
 
+    override fun getMaterialAboutList(context: Context): MaterialAboutList {
+        return MaterialAboutList.Builder().build()
+    }
 
+    /*
 
     override fun getMaterialAboutList(context: Context): MaterialAboutList {
         return MaterialAboutList.Builder()
@@ -90,11 +97,6 @@ class AboutActivity : MaterialAboutActivity() {
         authorCardBuilder.addItem(
             MaterialAboutActionItem.Builder()
                 .text("visit my GitHub")
-                .icon(
-                    IconicsDrawable(this)
-                        .icon(CommunityMaterial.Icon.cmd_github_circle)
-                        .sizeDp(18)
-                )
                 .setOnClickAction(
                     ConvenienceBuilder.createWebsiteOnClickAction(
                         this,
@@ -105,6 +107,8 @@ class AboutActivity : MaterialAboutActivity() {
         )
         return authorCardBuilder.build()
     }
+
+     */
 
 
 }

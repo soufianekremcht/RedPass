@@ -1,6 +1,7 @@
 package com.soufianekre.redpass.ui.main
 
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -23,11 +24,12 @@ import com.soufianekre.redpass.ui.password_editor.PasswordEditorActivity
 import com.soufianekre.redpass.ui.passwords.PasswordListFragment
 import com.soufianekre.redpass.ui.settings.SettingsActivity
 
-
+@SuppressLint("NonConstantResourceId")
 class MainActivity :BaseActivity() ,MainMvp.View{
 
 
     private val FRAGMENT_DRAWER_TAG: String = "fragment_drawer_tag"
+
 
 
     @BindView(R.id.app_toolbar)
@@ -50,7 +52,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
         mPresenter = MainPresenter()
         ButterKnife.bind(this)
         mPresenter.onAttach(this)
-        setupUi()
+        setupUI()
         loadPasswordListFragment(null)
     }
 
@@ -63,7 +65,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main,menu)
+        menuInflater.inflate(R.menu.main,menu)
         val searchManager : SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView = menu!!.findItem(R.id.menu_main_search).actionView as SearchView
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
@@ -101,7 +103,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
 
 
 
-    fun setupUi(){
+    private fun setupUI(){
         mainToolbar.setOnClickListener{
             onBackPressed()
         }

@@ -17,23 +17,12 @@ open class BaseActivity :AppCompatActivity(),BaseMvp.View{
         super.onCreate(savedInstanceState)
     }
 
-
-
-    override fun showError(tag : String, resId: Int) {
-        showError(tag,getString(resId))
-    }
-
-    override fun showError(tag:String, message: String?) {
+    override fun showError(message: String?) {
         Toasty.error(this,message!!,Toasty.LENGTH_LONG).show()
-        Log.e(tag,message)
     }
 
     override fun showMessage(message: String?) {
         Toasty.info(this,message!!,Toasty.LENGTH_SHORT).show()
-    }
-
-    override fun showMessage(resId: Int) {
-        showMessage(getString(resId))
     }
 
     override fun hideKeyboard() {
