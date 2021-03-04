@@ -1,6 +1,5 @@
 # RedPass
-Simple Password Manager
-
+Simple Password Manager App For Android
 
 Under Develepment ...
 
