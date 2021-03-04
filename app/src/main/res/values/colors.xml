@@ -18,7 +18,7 @@
     <color name="roundedimagepaint">#BAB399</color>
 
     <!--Colors for preference dialog pie chart-->
-    <color name="piechart_red">#FFEF5350</color>
+    <color name="drawer_selection_color">#92EF5350</color>
     <color name="piechart_green">#FF4CAF50</color>
     <color name="piechart_blue">#FF2196F3</color>
 
@@ -61,6 +61,7 @@
     <color name="accent_black">#212121</color>
     <color name="accent_blue_grey">#607d8b</color>
     <color name="accent_super_su">#004d40</color>
+    <color name="black">#000000</color>
 
     <!-- colors used for files items -->
     <color name="goback_item">#757575</color>
@@ -82,8 +83,8 @@
     <color name="item_background">#9f757575</color>
     <color name="icon_background_dark">#303030</color>
 
-    <color name="text_light">#8A000000</color>
-    <color name="text_dark">#B3ffffff</color>
+    <color name="text_light_mode">#8A000000</color>
+    <color name="text_dark_mode">#B3ffffff</color>
 
     <!-- indicator -->
 
@@ -102,13 +103,6 @@
     <color name="warningColor">#ffe082</color>
     <!-- Error error for InputTextLayout -->
     <color name="error_color_material">#F4511E</color>
-
-
-
-
-
-
-
 
     <color name="bg_circle_default">@color/colorPrimary</color>
 </resources>

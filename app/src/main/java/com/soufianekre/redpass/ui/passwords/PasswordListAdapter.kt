@@ -2,30 +2,33 @@ package com.soufianekre.redpass.ui.passwords
 
 import android.content.Context
 import android.util.SparseBooleanArray
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.soufianekre.redpass.data.db.models.PasswordItem
 import com.soufianekre.redpass.helpers.AppHelper
 import com.soufianekre.redpass.helpers.DateHelper
 import com.soufianekre.redpass.helpers.FlipAnimator
-import kotlinx.android.synthetic.main.card_password_item.view.*
+import com.soufianekre.redpass.helpers.MyTimeUtils
+import kotlinx.android.synthetic.main.item_password_card.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class PasswordListAdapter(context: Context, private var passwordList: ArrayList<PasswordItem>,private var listener :PasswordListAdapterListener) :
-    RecyclerView.Adapter<PasswordListAdapter.PasswordListViewHolder>() {
+class PasswordListAdapter(context: Context, private var passwordList: ArrayList<PasswordItem>,
+                          private var listener :PasswordListAdapterListener) :
+    RecyclerView.Adapter<PasswordListAdapter.PasswordListViewHolder>() ,Filterable{
 
+    private var passwordItemsFiltered : ArrayList<PasswordItem> = ArrayList()
 
     private var TIME_FORMAT: String = "hh:mm"
     var mContext: Context = context
-    private var selectedItems : SparseBooleanArray = SparseBooleanArray(passwordList.size)
+    private var selectedItems : SparseBooleanArray = SparseBooleanArray()
     private var animationItemsIndex : SparseBooleanArray = SparseBooleanArray(passwordList.size)
 
     var current_item_selected = -1
@@ -35,14 +38,14 @@ class PasswordListAdapter(context: Context, private var passwordList: ArrayList<
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PasswordListViewHolder {
-        val view = LayoutInflater.from(mContext).inflate(com.soufianekre.redpass.R.layout.card_password_item,parent,false)
+        val view = LayoutInflater.from(mContext).inflate(com.soufianekre.redpass.R.layout.item_password_card,parent,false)
         return PasswordListViewHolder(view)
     }
 
     override fun getItemCount(): Int = passwordList.size
 
     override fun onBindViewHolder(holder: PasswordListViewHolder, position: Int) {
-        var passwordItem  = passwordList[position]
+        val passwordItem  = passwordList[position]
 
         // change the row state to activated
         holder.itemView.isActivated = selectedItems.get(position, false);
@@ -52,24 +55,20 @@ class PasswordListAdapter(context: Context, private var passwordList: ArrayList<
         holder.passwordIconImg.setColorFilter(AppHelper.getRandomMaterialColor(mContext,400))
         holder.passwordUseTitle.text = passwordItem.account_use
 
-        holder.passwordCreationDateText.text = DateHelper.format(mContext, Date().time,TIME_FORMAT)
-
+        holder.passwordCreationDateText.text = MyTimeUtils.formatTimestamp(mContext
+            ,passwordItem.lastUpdatedDate)
 
         setListeners(holder,position)
         applyIconAnimation(holder,position)
     }
 
     private fun setListeners(holder: PasswordListViewHolder, position:Int){
-
-
         holder.itemView.setOnClickListener{
-            if (!selection_mode)
-                listener.onItemClicked(passwordList[position],position)
-            else
-                toggleSelection(position)
+           listener.onItemClicked(passwordList[position],position)
         }
         holder.itemView.setOnLongClickListener{
             listener.onItemLongClicked(position)
+            it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
             return@setOnLongClickListener true
         }
     }
@@ -92,6 +91,15 @@ class PasswordListAdapter(context: Context, private var passwordList: ArrayList<
         }
     }
 
+    fun selectAll() {
+        if (passwordList.size > 1) {
+            for (i in 0 until passwordList.size) {
+                selectedItems.put(i, true)
+            }
+        }
+        notifyDataSetChanged()
+    }
+
     // Selection
     fun toggleSelection(pos: Int) {
         current_item_selected = pos
@@ -104,16 +112,7 @@ class PasswordListAdapter(context: Context, private var passwordList: ArrayList<
         notifyItemChanged(pos)
     }
 
-    fun selectAll() {
-        if (passwordList.size > 1) {
-            for (i in 0 until passwordList.size) {
-                selectedItems.put(i, true)
-            }
-        }
-        notifyDataSetChanged()
 
-
-    }
     fun clearSelection() {
         selectedItems.clear()
         notifyDataSetChanged()
@@ -177,17 +176,12 @@ class PasswordListAdapter(context: Context, private var passwordList: ArrayList<
     inner class PasswordListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var iconBack : RelativeLayout = itemView.icon_back
-
         var iconFront : RelativeLayout = itemView.icon_front
 
         var passwordIconImg : ImageView = itemView.password_icon_img
-
         var passwordIconText:TextView = itemView.password_icon_text
-
         var passwordTitleText :TextView = itemView.password_title
-
         var passwordUseTitle: TextView = itemView.password_account_use_title
-
         var passwordCreationDateText:TextView = itemView.password_creation_date_text
 
     }
@@ -196,6 +190,39 @@ class PasswordListAdapter(context: Context, private var passwordList: ArrayList<
         fun onItemClicked(passwordItem: PasswordItem,position: Int)
         fun onItemLongClicked(position : Int)
 
+    }
+
+    // filter results
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(charSequence: CharSequence): FilterResults? {
+                val charString = charSequence.toString()
+                if (charString.isEmpty()) {
+                    passwordItemsFiltered = passwordList
+                } else {
+                    val filteredList: MutableList<PasswordItem> = ArrayList()
+                    for (passwordItem in passwordList) {
+
+                        // here we are looking for name or phone number match
+                        if (passwordItem.title.toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(passwordItem)
+                        }
+                    }
+                    passwordItemsFiltered.clear();
+                    passwordItemsFiltered.addAll(filteredList);
+                }
+                val filterResults = FilterResults()
+                filterResults.values = passwordItemsFiltered
+                return filterResults
+            }
+
+            override fun publishResults(
+                charSequence: CharSequence?,
+                filterResults: FilterResults) {
+                passwordItemsFiltered = filterResults.values as ArrayList<PasswordItem>
+                notifyDataSetChanged()
+            }
+        }
     }
 
 }

@@ -5,4 +5,13 @@
     <string name="navigation_drawer_close">Close</string>
     <string name="search_hint">Search For Password</string>
     <string name="title_about">About</string>
+
+    <string name="finger_print_instructions">Place your fingertip on the Home button to verify your identity
+</string>
+    <string name="edit_label">Edit Label</string>
+    <string name="now">Now</string>
+    <string name="expanded">Expanded</string>
+    <string name="collapsed">Collapsed</string>
+    <string name="colors">Colors</string>
+    <string name="select">Select</string>
 </resources>

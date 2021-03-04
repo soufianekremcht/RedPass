@@ -1,7 +1,8 @@
 package com.soufianekre.redpass.ui.passwords
 
 
-import android.widget.SearchView
+
+import androidx.appcompat.widget.SearchView
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.data.db.models.PasswordItem
 import com.soufianekre.redpass.helpers.RxSearchObservable
@@ -28,7 +29,7 @@ class PasswordListPresenter<V:PasswordListMvp.View>:BasePresenter<V>(),PasswordL
         compositeDisposable.add(dataManager.getAppDatabase().passwordItemDoa().getPasswordList()
             .compose(schedulerProvider.ioToMainFlowableScheduler())
             .subscribe({
-                var results : ArrayList<PasswordItem> = ArrayList()
+                val results : ArrayList<PasswordItem> = ArrayList()
                 if (label == null){
                     for (passwordItem in  it){
                         if (passwordItem.title.contains(query)) results.add(passwordItem)
@@ -52,9 +53,6 @@ class PasswordListPresenter<V:PasswordListMvp.View>:BasePresenter<V>(),PasswordL
 
         )
     }
-
-
-
     override fun onItemClicked(passwordItem : PasswordItem,position:Int) {
         if (getMvpView()?.getActionMode() != null){
             getMvpView()?.toggleItemSelection(position)

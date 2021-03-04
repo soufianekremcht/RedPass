@@ -1,6 +1,5 @@
 package com.soufianekre.redpass.ui.settings
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -8,9 +7,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.ui.base.BaseActivity
-import com.soufianekre.redpass.ui.settings.security.SecurityPref
+import com.soufianekre.redpass.ui.settings.security.SecurityPrefFragment
 
-class SettingsActivity : BaseActivity(),SettingsMvp.View{
+class SettingsActivity : BaseActivity(){
 
     @BindView(R.id.settings_toolbar)
     lateinit var settingsToolbar : Toolbar
@@ -25,6 +24,7 @@ class SettingsActivity : BaseActivity(),SettingsMvp.View{
 
     private fun setupUI() {
         setSupportActionBar(settingsToolbar)
+        settingsToolbar.title = "Settings"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -41,19 +41,12 @@ class SettingsActivity : BaseActivity(),SettingsMvp.View{
     }
 
     override fun onBackPressed() {
-        if (getCurrentFragment() is SecurityPref){
-            showMessage("Security Pref")
-            supportFragmentManager.popBackStack();
-        }else{
-            finish()
-        }
-
+        super.onBackPressed()
     }
 
-    fun loadPrefFragment(fragment : Fragment){
+    private fun loadPrefFragment(fragment : Fragment){
         supportFragmentManager
             .beginTransaction().replace(R.id.settings_container,fragment)
-            .addToBackStack(null)
             .commit()
     }
 

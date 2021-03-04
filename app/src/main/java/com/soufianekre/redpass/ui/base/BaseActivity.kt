@@ -3,11 +3,11 @@ package com.soufianekre.redpass.ui.base
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.soufianekre.redpass.helpers.KeyboardUtils
 
 import com.soufianekre.redpass.ui.base.mvp.BaseMvp
+import es.dmoral.toasty.Toasty
 
 @SuppressLint("Registered")
 open class BaseActivity :AppCompatActivity(),BaseMvp.View{
@@ -17,22 +17,12 @@ open class BaseActivity :AppCompatActivity(),BaseMvp.View{
         super.onCreate(savedInstanceState)
     }
 
-
-
-    override fun onError(tag : String,resId: Int) {
-        onError(tag,getString(resId))
-    }
-
-    override fun onError(tag:String,message: String?) {
-        Log.e(tag,message)
+    override fun showError(message: String?) {
+        Toasty.error(this,message!!,Toasty.LENGTH_LONG).show()
     }
 
     override fun showMessage(message: String?) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showMessage(resId: Int) {
-        showMessage(getString(resId))
+        Toasty.info(this,message!!,Toasty.LENGTH_SHORT).show()
     }
 
     override fun hideKeyboard() {

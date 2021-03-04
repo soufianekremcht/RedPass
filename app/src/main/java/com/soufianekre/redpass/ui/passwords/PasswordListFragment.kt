@@ -125,17 +125,16 @@ class PasswordListFragment :BaseFragment(),PasswordListMvp.View{
 
     override fun toggleItemSelection(position:Int){
         passwordAdapter.toggleSelection(position)
-        if(passwordAdapter.getSelectedItemCount()>0){
-            actionMode?.title = passwordAdapter.getSelectedItemCount().toString()
-            actionMode?.invalidate()
-        }else{
+        val count = passwordAdapter.getSelectedItemCount();
+        if(count == 0){
             actionMode?.finish()
-            actionMode = null
+        }else{
+            actionMode?.title = count.toString()
+            actionMode?.invalidate()
         }
     }
 
     // Action Mode
-
     override fun getActionMode(): ActionMode? {
         return actionMode
     }
@@ -182,7 +181,7 @@ class PasswordListFragment :BaseFragment(),PasswordListMvp.View{
             mode: ActionMode?,
             menu: Menu?
         ): Boolean {
-            mode!!.menuInflater.inflate(R.menu.menu_action,menu)
+            mode!!.menuInflater.inflate(R.menu.action,menu)
             passwordAdapter.selection_mode =true
             changeStatusBarColor(ColorsHelper.getColor(getMainActivity()!!,R.color.holo_dark_action_mode))
             getMainActivity()?.getFab()!!.hide()

@@ -1,6 +1,7 @@
 package com.soufianekre.redpass.ui.labels
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,8 +27,7 @@ class LabelsAdapter(private var mContext : Context, private var labels : ArrayLi
     override fun onBindViewHolder(holder: LabelViewHolder, position: Int) {
         val label = labels[position]
         holder.labelText.text = label.name
-        holder.labelIcon.setColorFilter(AppHelper.getRandomMaterialColor(mContext,400))
-
+        holder.labelIcon.setColorFilter(AppHelper.getRandomMaterialColor(mContext,500))
         setListeners(holder,position)
     }
 
@@ -59,11 +59,18 @@ class LabelsAdapter(private var mContext : Context, private var labels : ArrayLi
                 labels.remove(label)
                 notifyItemRemoved(i)
         }
-
     }
+
     fun add(label :Label){
         labels.add(label)
         notifyItemInserted(labels.size- 1)
+    }
+
+    fun isLabelExisted(title : String) : Boolean{
+        labels.forEach {
+            if (title == it.name) return true
+        }
+        return false
     }
 
 

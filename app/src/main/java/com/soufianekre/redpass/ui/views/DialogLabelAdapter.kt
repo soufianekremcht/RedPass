@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.helpers.AppHelper
-import kotlinx.android.synthetic.main.drawer_item_label.view.*
+import kotlinx.android.synthetic.main.item_drawer_label.view.*
 
 
 class DialogLabelAdapter(var mActivity: Activity, var labels: ArrayList<Label>,
@@ -29,7 +29,7 @@ class DialogLabelAdapter(var mActivity: Activity, var labels: ArrayList<Label>,
         var view : View? = convertView
         if (view == null){
             val inflater = mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(com.soufianekre.redpass.R.layout.drawer_item_label,parent,false)
+            view = inflater.inflate(com.soufianekre.redpass.R.layout.item_drawer_label,parent,false)
             holder = LabelBaseViewHolder(view)
 
 

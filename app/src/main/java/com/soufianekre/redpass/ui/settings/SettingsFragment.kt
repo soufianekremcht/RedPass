@@ -6,13 +6,12 @@ import androidx.preference.Preference
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.app_pref.PrefConst.PREF_ABOUT
 import com.soufianekre.redpass.data.app_pref.PrefConst.PREF_SECURITY
-import com.soufianekre.redpass.ui.about.AboutActivity
+import com.soufianekre.redpass.ui.settings.about.AboutActivity
 import com.soufianekre.redpass.ui.base.BasePreferenceFragment
-import com.soufianekre.redpass.ui.settings.security.SecurityPref
+import com.soufianekre.redpass.ui.settings.security.SecurityPrefActivity
 
 class SettingsFragment : BasePreferenceFragment() , Preference.OnPreferenceClickListener{
 
-    lateinit var securityPref: SecurityPref
     companion object{
         fun newInstance(): SettingsFragment {
             val args = Bundle()
@@ -29,15 +28,17 @@ class SettingsFragment : BasePreferenceFragment() , Preference.OnPreferenceClick
         securityPref!!.onPreferenceClickListener = this
     }
 
-
-    private fun getSettingsActivity() : SettingsActivity{
-        return activity as SettingsActivity;
-    }
-
     override fun onPreferenceClick(preference: Preference?): Boolean {
         when(preference!!.key){
-            PREF_SECURITY -> getSettingsActivity().loadPrefFragment(SecurityPref.newInstance())
-            PREF_ABOUT -> getSettingsActivity().startActivity(Intent(activity,AboutActivity::class.java))
+            PREF_SECURITY -> {
+                val intent = Intent(requireActivity(),SecurityPrefActivity::class.java)
+                startActivity(intent)
+            }
+            PREF_ABOUT -> {
+                val intent = Intent(requireActivity(),
+                    AboutActivity::class.java)
+                startActivity(intent)
+            }
         }
         return true
     }

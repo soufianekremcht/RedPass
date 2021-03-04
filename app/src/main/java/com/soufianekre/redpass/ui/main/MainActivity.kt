@@ -1,14 +1,15 @@
 package com.soufianekre.redpass.ui.main
 
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -18,19 +19,20 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.ui.base.BaseActivity
-import com.soufianekre.redpass.ui.main.drawer.AppNavigationDrawerFragment
+import com.soufianekre.redpass.ui.main.drawer.NavDrawerFragment
 import com.soufianekre.redpass.ui.password_editor.PasswordEditorActivity
 import com.soufianekre.redpass.ui.passwords.PasswordListFragment
 import com.soufianekre.redpass.ui.settings.SettingsActivity
 
-
+@SuppressLint("NonConstantResourceId")
 class MainActivity :BaseActivity() ,MainMvp.View{
 
 
     private val FRAGMENT_DRAWER_TAG: String = "fragment_drawer_tag"
 
 
-    @BindView(R.id.main_toolbar)
+
+    @BindView(R.id.app_toolbar)
     lateinit var mainToolbar : Toolbar
 
     @BindView(R.id.password_add_fab)
@@ -39,7 +41,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     @BindView(R.id.main_drawer)
     lateinit var mainDrawer : DrawerLayout
 
-    private var searchView :SearchView? = null
+    private var searchView : SearchView? = null
 
 
     lateinit var mPresenter :MainPresenter<MainMvp.View>
@@ -50,7 +52,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
         mPresenter = MainPresenter()
         ButterKnife.bind(this)
         mPresenter.onAttach(this)
-        setupUi()
+        setupUI()
         loadPasswordListFragment(null)
     }
 
@@ -61,8 +63,9 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     override fun onDestroy() {
         super.onDestroy()
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main,menu)
+        menuInflater.inflate(R.menu.main,menu)
         val searchManager : SearchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView = menu!!.findItem(R.id.menu_main_search).actionView as SearchView
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
@@ -84,11 +87,11 @@ class MainActivity :BaseActivity() ,MainMvp.View{
 
     override fun loadFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction()
-            .setCustomAnimations(
+            /*.setCustomAnimations(
                 R.anim.anim_in,
                 R.anim.anim_out,
                 R.anim.anim_in_pop,
-                R.anim.anim_out_pop)
+                R.anim.anim_out_pop)*/
             .replace(R.id.fragment_container,fragment)
             .commit()
     }
@@ -100,7 +103,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
 
 
 
-    fun setupUi(){
+    private fun setupUI(){
         mainToolbar.setOnClickListener{
             onBackPressed()
         }
@@ -114,11 +117,11 @@ class MainActivity :BaseActivity() ,MainMvp.View{
         setSupportActionBar(mainToolbar)
 
         val mNavigationDrawerFragment = supportFragmentManager.findFragmentById(R.id.main_nav_view)
-                as AppNavigationDrawerFragment?
+                as NavDrawerFragment?
         if (mNavigationDrawerFragment == null) {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(
-                R.id.main_nav_view, AppNavigationDrawerFragment.newInstance(),
+                R.id.main_nav_view, NavDrawerFragment.newInstance(),
                 FRAGMENT_DRAWER_TAG
             ).commit()
         }
@@ -148,5 +151,12 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     }
 
 
+    override fun onBackPressed() {
+        if (searchView!!.isIconified){
+            searchView!!.isIconified = false;
 
+        }else{
+            super.onBackPressed()
+        }
+    }
 }

@@ -8,10 +8,10 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.google.android.material.chip.Chip
 import com.soufianekre.redpass.R
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.data.db.models.PasswordItem
@@ -31,8 +31,8 @@ class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
     lateinit var toolbar : Toolbar
 
 
-    @BindView(R.id.pass_chosen_category)
-    lateinit var passwordEditorChosenLabel : TextView
+    @BindView(R.id.chip_password_label)
+    lateinit var passwordEditorChosenLabel : Chip
 
     @BindView(R.id.pass_title_field)
     lateinit var passwordEditorTitleField:EditText
@@ -91,7 +91,7 @@ class PasswordEditorActivity :BaseActivity(),PasswordEditorMvp.View{
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_password_editor,menu)
+        menuInflater.inflate(R.menu.password_editor,menu)
         return true
     }
 

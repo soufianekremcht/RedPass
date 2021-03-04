@@ -7,13 +7,14 @@
 
 
 
-    <include layout="@layout/toolbar_"/>
+    <include layout="@layout/view_toolbar_"/>
     <RelativeLayout
         android:id="@+id/user_password_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/spacing_normal"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:padding="@dimen/spacing_small"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/user_password_description"

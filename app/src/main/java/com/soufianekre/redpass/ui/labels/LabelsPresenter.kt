@@ -2,18 +2,19 @@ package com.soufianekre.redpass.ui.labels
 
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.ui.base.mvp.BasePresenter
+import timber.log.Timber
 
 class LabelsPresenter<V : LabelsMvp.View> :BasePresenter<V>(),LabelsMvp.Presenter<V>{
 
-
-    override fun addLabel(name:String) {
-        val label = Label(name)
+    override fun addLabel(name:String,color:Int) {
+        val label = Label(name,color.toString())
         compositeDisposable.add(dataManager.getAppDatabase().labelDoa().insertLabel(label)
             .compose(schedulerProvider.ioToMainCompletableScheduler())
             .subscribe ({
                 getMvpView()?.onItemInserted(label)
             },{
-                getMvpView()?.onError("LabelPresenter",it.localizedMessage)
+                getMvpView()?.showError(it.localizedMessage)
+                Timber.e(it.localizedMessage)
             })
 
         )
@@ -25,9 +26,9 @@ class LabelsPresenter<V : LabelsMvp.View> :BasePresenter<V>(),LabelsMvp.Presente
             .subscribe ({
                 getMvpView()?.updateAdapter(it)
             },{
-                getMvpView()?.onError("LabelPresenter",it.localizedMessage)
-            })
 
+                Timber.e(it.localizedMessage)
+            })
         )
     }
 
