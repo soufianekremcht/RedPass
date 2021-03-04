@@ -47,7 +47,6 @@ class SettingsActivity : BaseActivity(){
     private fun loadPrefFragment(fragment : Fragment){
         supportFragmentManager
             .beginTransaction().replace(R.id.settings_container,fragment)
-            .addToBackStack(null)
             .commit()
     }
 

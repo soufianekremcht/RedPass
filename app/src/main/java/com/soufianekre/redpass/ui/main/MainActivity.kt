@@ -8,8 +8,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -41,7 +41,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     @BindView(R.id.main_drawer)
     lateinit var mainDrawer : DrawerLayout
 
-    private var searchView :SearchView? = null
+    private var searchView : SearchView? = null
 
 
     lateinit var mPresenter :MainPresenter<MainMvp.View>
@@ -154,6 +154,7 @@ class MainActivity :BaseActivity() ,MainMvp.View{
     override fun onBackPressed() {
         if (searchView!!.isIconified){
             searchView!!.isIconified = false;
+
         }else{
             super.onBackPressed()
         }

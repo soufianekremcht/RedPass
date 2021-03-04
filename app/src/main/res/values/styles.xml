@@ -20,9 +20,9 @@
         <item name="colorSurface">@color/my_app_surface_color</item>
         <item name="colorOnBackground">@color/my_app_color_on_background</item>
         <item name="colorOnError">@color/my_app_color_on_error</item>
-        <item name="colorOnSurface">@color/my_app_color_on_surface</item>-->
-        
-<!--        <item name="scrimBackground">@color/mtrl_scrim_color</item>-->
+        <item name="colorOnSurface">@color/my_app_color_on_surface</item>
+        -->
+<!--    <item name="scrimBackground">@color/mtrl_scrim_color</item>-->
         <item name="windowActionModeOverlay">true</item>
         <item name="android:actionModeBackground">@color/holo_dark_action_mode</item>
         <item name="actionModeBackground">@color/holo_dark_action_mode</item>

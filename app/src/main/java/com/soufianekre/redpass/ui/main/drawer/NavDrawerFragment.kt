@@ -10,6 +10,7 @@ import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -41,7 +42,7 @@ class NavDrawerFragment: BaseFragment(),NavDrawerMvp.View{
 
 
     @BindView(R.id.drawer_item_all)
-    lateinit var showAll : CollapsibleCard
+    lateinit var showAll : LinearLayout
 
 
     @BindView(R.id.drawer_item_settings)

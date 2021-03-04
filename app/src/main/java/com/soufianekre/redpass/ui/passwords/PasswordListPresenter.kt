@@ -1,7 +1,8 @@
 package com.soufianekre.redpass.ui.passwords
 
 
-import android.widget.SearchView
+
+import androidx.appcompat.widget.SearchView
 import com.soufianekre.redpass.data.db.models.Label
 import com.soufianekre.redpass.data.db.models.PasswordItem
 import com.soufianekre.redpass.helpers.RxSearchObservable
